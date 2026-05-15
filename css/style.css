@@ -1,0 +1,178 @@
+:root {
+  --main-color: #4af626;
+  --light-green: #90ee90;
+  --light-blue: #2bc9d9;
+  --trans-light-blue: #2bc9d922;
+  --light-red: #ff2400;
+  --trans-light-red: #ff240022;
+  --bg-color: #171717;
+  --minigame-comp: #ffd41d;
+  --yellow-border: #e5ba41;
+  --trans-green: #777c6ddd;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  font-family: "JetBrains Mono", "Consolas", "Monaco", "Courier New", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.vertical {
+  justify-content: flex-start;
+}
+
+@keyframes question-hover {
+  0% {
+    border-top: 3px dotted;
+    border-image: linear-gradient(90deg, red, blue) 1;
+  }
+  25% {
+    border-right: 3px dotted;
+    border-image: linear-gradient(90deg, red, blue) 1;
+  }
+  50% {
+    border-bottom: 3px dotted;
+    border-image: linear-gradient(90deg, red, blue) 1;
+  }
+  75% {
+    border-left: 3px dotted;
+    border-image: linear-gradient(90deg, red, blue) 1;
+  }
+}
+
+@keyframes gradient {
+  from {
+    background: linear-gradient(var(--light-green), var(--light-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  to {
+    background: linear-gradient(var(--light-blue), var(--light-green));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+p {
+  color: white;
+  margin: 20px;
+}
+
+.text {
+  border: 2px solid var(--main-color);
+  padding: 10px;
+  height: 150px;
+  font-size: 20px;
+  max-width: 600px;
+  margin: 20px;
+  text-align: center;
+  overflow: hidden;
+  animation: typing 0.25s steps(40, end) forwards, gradient 0.5s infinite;
+  clip-path: inset(0 100% 0 0)
+  white-space: normal;
+}
+
+button {
+  margin: 20px;
+  background-color: var(--main-color);
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  animation: question-hover 0.25s infinite;
+  background: linear-gradient(red, blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.minigame-computer {
+  background-color: var(--minigame-comp);
+  border: 5px solid var(--yellow-border);
+  width: 15px;
+  height: 15px;
+  position: fixed;
+  bottom: round(50vh, 10px);
+  left: round(50vw, 10px);
+}
+
+.splash {
+  position: fixed;
+}
+
+.hidden {
+  display: none;
+}
+
+.enemy {
+  background-color: var(--light-red);
+  width: 50px;
+  height: 10px;
+  position: fixed;
+  left: -50px;
+}
+
+#final {
+  margin: auto;
+  display: none;
+  z-index: 1000;
+  font-size: 25px;
+  background-color: var(--trans-green);
+}
+
+.time {
+  font-size: 25px;
+}
+
+#continue {
+  font-size: 40px;
+}
+
+.ray {
+  display: none;
+  position: fixed;
+  width: max(30vw, 100px);
+  height: 100vh;
+  background-color: var(--trans-light-blue);
+}
+
+.laser {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 15vh;
+  background-color: var(--trans-light-red);
+}
+
+.active {
+  background-color: var(--light-blue);
+}
+
+.fired {
+  background-color: var(--light-red);
+}
+
+@media (min-width: 350px) and (min-height: 650px) {
+  .computer-face,
+  .angry-computer-face {
+    height: 250px;
+  }
+  .eyes {
+    padding: 50px;
+  }
+}
+
+@media (min-height: 550px) and (min-width: 480px) {
+  .text {
+    font-size: 30px;
+  }
+}
