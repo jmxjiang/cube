@@ -141,9 +141,17 @@
 
         if (on && dead(pLeft, pBottom, eLeft, eBottom, rLeft, lBottom, rayw, laserh)) {
           on = false;
+          let highScore = parseInt(localStorage.getItem('highScore') || 0);
+
+          if (survived > highScore) {
+            localStorage.setItem('highScore', survived);
+            highScore = survived;
+          }
+
           cancelAnimationFrame(compFrameID);
           $('#final').show();
           $('#score').append(survived);
+          $('#high-score').append(highScore);
           $('body > .time').hide();
           $('#final > .time').append(str);
 
