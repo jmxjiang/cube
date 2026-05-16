@@ -198,6 +198,7 @@ button:hover {
     user-select: none;
     -webkit-touch-callout: none;
     cursor: pointer;
+    touch-action: manipulation;
     z-index: 2;
     display: flex;
     justify-position: center;
