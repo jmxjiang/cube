@@ -141,7 +141,7 @@
 
         if (on && dead(pLeft, pBottom, eLeft, eBottom, rLeft, lBottom, rayw, laserh)) {
           on = false;
-          let highScore = parseInt(localStorage.getItem('highScore') || 0);
+          let highScore = parseInt(localStorage.getItem('highScore') || 0, 10);
 
           if (survived > highScore) {
             localStorage.setItem('highScore', survived);
