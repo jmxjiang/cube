@@ -104,6 +104,7 @@ button:hover {
   position: fixed;
   bottom: round(50vh, 10px);
   left: round(50vw, 10px);
+  z-index: 3;
 }
 
 .splash {
@@ -120,6 +121,7 @@ button:hover {
   height: 10px;
   position: fixed;
   left: -50px;
+  z-index: 3;
 }
 
 #final {
@@ -144,7 +146,7 @@ button:hover {
   width: max(30vw, 100px);
   height: 100vh;
   background-color: var(--trans-light-blue);
-  z-index: -99
+  z-index: -1;
 }
 
 .laser {
@@ -153,7 +155,7 @@ button:hover {
   width: 100vw;
   height: 15vh;
   background-color: var(--trans-light-red);
-  z-index: 1;
+  z-index: -1;
 }
 
 .active {
@@ -168,7 +170,7 @@ button:hover {
   display: none;
 }
 
-@media (pointer: coarse) or (max-width: 1200px) {
+@media (max-width: 1200px) {
   .mobile-controls {
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -192,12 +194,21 @@ button:hover {
 
   .mobile-controls > button {
     background-color: var(--light-gray);
-    z-index: 99;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    cursor: pointer;
+    z-index: 2;
     display: flex;
     justify-position: center;
     align-items: center;
     padding: 10px;
     margin: 0;
+  }
+
+  .mobile-controls img {
+    -webkit-user-drag: none;
+    user-select: none;
   }
 }
 
