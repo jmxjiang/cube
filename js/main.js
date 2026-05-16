@@ -152,7 +152,7 @@
           $('#final').show();
           $('#score').append(survived);
           $('#high-score').append(highScore);
-          $('body > .time').hide();
+          $('body > .time' ).hide();
           $('#final > .time').append(str);
 
           $('.minigame-computer')
