@@ -46,6 +46,7 @@
   });
 
   (function compFrame() {
+    console.log(keysPressed)
     const width = $(window).width();
     const height = $(window).height();
     const left = parseInt(comp.css('left'));
@@ -82,6 +83,12 @@
       keysPressed[key] = e.type === 'keydown';
     }
   });
+
+  $('.mobile-controls > button').on('pointerdown pointerup', function(e) {
+    if (['w', 'a', 's', 'd'].includes(this.id)) {
+      keysPressed[this.id] = e.type === 'pointerdown';
+    }
+  })
 
   $(window).on('keydown', e => {
     if (e.key.toLowerCase() === 'f' && $('#final').css('display') === 'block') $('#continue').click();

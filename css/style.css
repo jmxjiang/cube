@@ -8,6 +8,7 @@
   --bg-color: #171717;
   --minigame-comp: #ffd41d;
   --yellow-border: #e5ba41;
+  --light-gray: #444444;
   --trans-green: #777c6ddd;
 }
 
@@ -143,6 +144,7 @@ button:hover {
   width: max(30vw, 100px);
   height: 100vh;
   background-color: var(--trans-light-blue);
+  z-index: -99
 }
 
 .laser {
@@ -151,6 +153,7 @@ button:hover {
   width: 100vw;
   height: 15vh;
   background-color: var(--trans-light-red);
+  z-index: 1;
 }
 
 .active {
@@ -161,13 +164,40 @@ button:hover {
   background-color: var(--light-red);
 }
 
-@media (min-width: 350px) and (min-height: 650px) {
-  .computer-face,
-  .angry-computer-face {
-    height: 250px;
+.mobile-controls {
+  display: none;
+}
+
+@media (pointer: coarse) or (max-width: 1200px) {
+  .mobile-controls {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 0;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
   }
-  .eyes {
-    padding: 50px;
+
+  .mobile-controls > div:nth-child(even) {
+    grid-column-end: span 1;
+  }
+
+  .mobile-controls > div:nth-child(odd) {
+    grid-column-start: auto;
+  }
+
+  .mobile-controls > div:nth-child(5) {
+    background-color: var(--light-gray);
+  }
+
+  .mobile-controls > button {
+    background-color: var(--light-gray);
+    z-index: 99;
+    display: flex;
+    justify-position: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
   }
 }
 
