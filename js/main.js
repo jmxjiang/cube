@@ -19,7 +19,7 @@
   const LASERFREQ = 4250;
   const LASERINCOMINGTIME = 4000;
   const LASERACTIVEDURATION = 100;
-  const WINTIME = 45000;
+  const WINTIME = 90000;
   const TEXTDELAY = 3000;
   const getIdx = (() => {let idx = 0; return () => idx++})();
   let compFrameID;
