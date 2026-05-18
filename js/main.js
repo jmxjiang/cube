@@ -46,7 +46,6 @@
   });
 
   (function compFrame() {
-    console.log(keysPressed)
     const width = $(window).width();
     const height = $(window).height();
     const left = parseInt(comp.css('left'));
