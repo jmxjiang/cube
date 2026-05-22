@@ -27,16 +27,6 @@
   let victory = false;
   let data;
 
-  (async () => {
-    try {
-      const response = await fetch('victory.json');
-      data = await response.json();
-    } catch (err) {
-      console.error(`Error fetching JSON: ${err}`)
-      throw err;
-    }
-  })();
-
   $('#next').on('click', function () {
     if (data) {
       $('.text').html(data.victory[getIdx()]?.text || 'balo');
@@ -212,6 +202,15 @@
 
     setTimeout(() => {
       if (!on) return;
+      (async () => {
+        try {
+          const response = await fetch('victory.json');
+          data = await response.json();
+        } catch (err) {
+          console.error(`Error fetching JSON: ${err}`)
+           throw err;
+        }
+      })();
       clearInterval(rayInterval);
       clearInterval(laserInterval);
       victory = true;
