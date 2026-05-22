@@ -8,33 +8,40 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="imgs/logo.png" />
   </head>
-  <body class="vertical">
-    <div class="minigame-computer"></div>
+  <body>
+    <header>
+      <h1>Cube</h1>
+      <div class="minigame-computer"></div>
+    </header>
     <div class="enemies"></div>
-    <div id="final">
-      <p id="score">Score: </p>
-      <p id="high-score">High Score: </p>
-      <p class="time">Survived: </p>
-      <button type="button" id="continue" onclick="window.location.reload()">Continue</button>
-    </div>
-    <p class="time"></p>
-    <div class="mobile-controls">
-      <div></div>
-      <button id="w"><img src="imgs/up.png" alt="up arrow" width="70vw" /></button>
-      <div></div>
-      <button id="a"><img src="imgs/left.png" alt="left arrow" width="70vw" /></button>
-      <div></div>
-      <button id="d"><img src="imgs/right.png" alt="right arrow" width="70vw" /></button>
-      <div></div>
-      <button id="s"><img src="imgs/bottom.png" alt="bottom arrow" width="70vw" /></button>
-      <div></div>
-    </div>
-    <div class="ray"></div>
-    <div class="laser"></div>
-    <p class="text hidden">i see you</p>
-    <button type="button" class="hidden" id="next">Next</button>
+    <dialog id="settings">
+      <div id="settings-header">
+        <h2>Settings</h2>
+        <button type="button" onclick="document.getElementById('settings').close();"><img src="imgs/x.svg" alt="exit out settings" width="20" /></button>
+      </div>
+      <button onclick="toggle(this);">Show joystick: <span class="setting" id="joystick"></span></button>
+    </dialog>
+    <button type="button" class="main"><a href="minigame.html">Play</a></button>
+    <button type="button" class="main" onclick="document.getElementById('settings').showModal();">
+      Settings
+    </button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/nav.js"></script>
+    <script>
+      $('.setting').each(function() {
+        const el = $(this);
+        el.html(localStorage.getItem(el.attr('id')) ?? 'ON');
+      });
+      
+      function toggle(el) {
+        el = $(el);
+        const span = el.children('span').first();
+        const id = span.attr('id');
+        console.log(span.attr('id'));
+        localStorage.setItem(id, localStorage.getItem(id) === 'OFF' ? 'ON' : 'OFF')
+        span.html(localStorage.getItem(id));
+      }
+    </script>
   </body>
 </html>
