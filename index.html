@@ -38,7 +38,6 @@
         el = $(el);
         const span = el.children('span').first();
         const id = span.attr('id');
-        console.log(span.attr('id'));
         localStorage.setItem(id, localStorage.getItem(id) === 'OFF' ? 'ON' : 'OFF')
         span.html(localStorage.getItem(id));
       }
