@@ -19,12 +19,13 @@
   const LASERFREQ = 4250;
   const LASERINCOMINGTIME = 4000;
   const LASERACTIVEDURATION = 100;
-  const WINTIME = 90000;
+  const WINTIME = 1000;
   const TEXTDELAY = 3000;
   const getIdx = (() => {let idx = 0; return () => idx++})();
+  let start = null;
   let compFrameID;
   let on = true;
-  let victory = false;
+  let finished = false;
   let data;
 
   $('#next').on('click', function () {
@@ -95,8 +96,14 @@
            || (pLeft >= eLeft - 25 && pLeft <= eLeft + 50 && pBottom >= eBottom - 25 && pBottom <= eBottom + 10)
   }
 
+  const updateHighScore = survived_ms => {
+    let highScore = Math.max(parseInt(localStorage.getItem('highScore') || 0, 10), survived_ms);
+    localStorage.setItem('highScore', highScore);
+    return highScore;
+  }
+
   setTimeout(() => {
-    let start = Date.now();
+    start = Date.now();
     let counter = 1
     setInterval(() => {
       const width = $(window).width();
@@ -105,13 +112,13 @@
       const laserh = parseInt(laser.css('height'));
       const enemies = $('.enemies');
 
-      if (!victory && counter++ % FRAMESPERENEMYSPAWN === 0) {
+      if (!finished && counter++ % FRAMESPERENEMYSPAWN === 0) {
         for (let i = 0; i < ENEMYSPERSPAWN; i++) {
           addEnemy(Math.floor(Math.random() * (height - 10)));
         }
       }
 
-      if (!victory && counter === FRAMESPERBORDERENEMY) {
+      if (!finished && counter === FRAMESPERBORDERENEMY) {
         counter = 1;
         addEnemy(Math.floor(Math.random() * 50) + 10);
         addEnemy(height - 10 - Math.floor(Math.random() * 50))
@@ -137,17 +144,11 @@
 
         if (on && dead(pLeft, pBottom, eLeft, eBottom, rLeft, lBottom, rayw, laserh)) {
           on = false;
-          let highScore = parseInt(localStorage.getItem('highScore') || 0, 10);
-
-          if (survived > highScore) {
-            localStorage.setItem('highScore', survived);
-            highScore = survived;
-          }
-
           cancelAnimationFrame(compFrameID);
+
           $('#final').show();
           $('#score').append(survived);
-          $('#high-score').append(highScore);
+          $('#high-score').append(updateHighScore(survived));
           $('body > .time' ).hide();
           $('#final > .time').append(str);
 
@@ -208,14 +209,15 @@
           data = await response.json();
         } catch (err) {
           console.error(`Error fetching JSON: ${err}`)
-           throw err;
+          throw err;
         }
       })();
       clearInterval(rayInterval);
       clearInterval(laserInterval);
-      victory = true;
+      finished = true;
       setTimeout(() => {
         if (!on) return;
+        updateHighScore(Date.now() - start)
         $('.hidden').removeClass('hidden');
       }, TEXTDELAY)
     }, WINTIME)
