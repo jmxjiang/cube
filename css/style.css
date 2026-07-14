@@ -220,50 +220,44 @@ button:hover {
 }
 
 .mobile-controls {
-  display: none;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 0;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
 }
 
-@media (max-width: 1200px) {
-  .mobile-controls {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 0;
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-  }
+.mobile-controls > div:nth-child(even) {
+  grid-column-end: span 1;
+}
 
-  .mobile-controls > div:nth-child(even) {
-    grid-column-end: span 1;
-  }
+.mobile-controls > div:nth-child(odd) {
+  grid-column-start: auto;
+}
 
-  .mobile-controls > div:nth-child(odd) {
-    grid-column-start: auto;
-  }
+.mobile-controls > div:nth-child(5) {
+  background-color: var(--light-gray);
+}
 
-  .mobile-controls > div:nth-child(5) {
-    background-color: var(--light-gray);
-  }
+.mobile-controls > button {
+  background-color: var(--light-gray);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  z-index: 2;
+  display: flex;
+  justify-position: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0;
+}
 
-  .mobile-controls > button {
-    background-color: var(--light-gray);
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-    cursor: pointer;
-    touch-action: manipulation;
-    z-index: 2;
-    display: flex;
-    justify-position: center;
-    align-items: center;
-    padding: 10px;
-    margin: 0;
-  }
-
-  .mobile-controls img {
-    -webkit-user-drag: none;
-    user-select: none;
-  }
+.mobile-controls img {
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 @media (min-height: 550px) and (min-width: 480px) {
